@@ -31,15 +31,13 @@ HeapInt& HeapInt::operator == (const HeapInt &a){
     return this->getInt() == a.getInt();
 }
 
-HeapInt& HeapInt::operator >> (const HeapInt &a){  // entrada de cin e de outro
-                    >> a.getInt();
+istream& HeapInt::operator >> (istream& IS,const HeapInt &a){  // entrada de cin e de outro
+    return IS >> a.getInt();
 }
 
-HeapInt& HeapInt::operator << (const HeapInt &a){ // entrada de cout e de outro
-                    << a.getInt();
+ostream& HeapInt::operator << (ostream& OS,const HeapInt &a){ // entrada de cout e de outro
+    return OS << a.getInt();
 }
-
-
 
 
 
