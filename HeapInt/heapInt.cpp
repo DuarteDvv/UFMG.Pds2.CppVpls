@@ -1,66 +1,62 @@
 #include "heapi.hpp"
+#include <iostream>
 
-using namespace std;
+HeapInt::HeapInt() {
+    this->inteiro = new int(0);
+}
+
+HeapInt::HeapInt(int &a) {
+    this->inteiro = new int(a);
+}
+
+HeapInt::HeapInt(const HeapInt &a) {
+    this->inteiro = new int(a.getInt());
+}
+
+HeapInt::~HeapInt() {
+    delete this->inteiro;
+}
 
 int HeapInt::getInt() const {
     return *(this->inteiro);
 }
 
-void HeapInt::setInt(int a){
+void HeapInt::setInt(int a) {
     *(this->inteiro) = a;
 }
 
-HeapInt& HeapInt::operator = (const HeapInt &a){
+HeapInt& HeapInt::operator=(const HeapInt &a) {
     this->setInt(a.getInt());
     return *this;
 }
 
-HeapInt& HeapInt::operator = (const int &a){
-    return this->getInt() + a;
+HeapInt& HeapInt::operator=(const int &a) {
+    this->setInt(a);
+    return *this;
 }
 
-HeapInt& HeapInt::operator + (const HeapInt &a){
-    return this->getInt() + a.getInt();
-
+HeapInt& HeapInt::operator+(const HeapInt &a) {
+    this->setInt(this->getInt() + a.getInt());
+    return *this;
 }
 
-HeapInt& HeapInt::operator - (const HeapInt &a){
-    return this->getInt() - a.getInt();
+HeapInt& HeapInt::operator-(const HeapInt &a) {
+    this->setInt(this->getInt() - a.getInt());
+    return *this;
 }
 
-HeapInt& HeapInt::operator == (const HeapInt &a){
+bool HeapInt::operator==(const HeapInt &a) {
     return this->getInt() == a.getInt();
 }
 
-istream& HeapInt::operator >> (istream& IS,const HeapInt &a){  // entrada de cin e de outro
-    return IS >> a.getInt();
+std::istream& operator>>(std::istream &is, HeapInt &a) {
+    int value;
+    is >> value;
+    a.setInt(value);
+    return is;
 }
 
-ostream& HeapInt::operator << (ostream& OS,const HeapInt &a){ // entrada de cout e de outro
-    return OS << a.getInt();
+std::ostream& operator<<(std::ostream &os, const HeapInt &a) {
+    os << a.getInt();
+    return os;
 }
-
-
-
-
-HeapInt::HeapInt(){
-    this->inteiro = new int(0);
-
-}
-
-HeapInt::HeapInt(int &a){
-    this->inteiro = new int(a);
-
-}
-
-HeapInt::HeapInt(const HeapInt &a){
-    this& = a ;
-
-}
-
-HeapInt::~HeapInt(){
-    delete this->inteiro;
-
-}
-
-
