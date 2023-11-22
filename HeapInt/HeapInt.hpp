@@ -13,6 +13,10 @@ class HeapInt{
 
 
         HeapInt& operator = (const HeapInt &a);
+        int& operator = (const HeapInt &a);
+        HeapInt& operator + (const HeapInt &a);
+        HeapInt& operator - (const HeapInt &a);
+
 
         int getInt() const;
         void setInt(int);
