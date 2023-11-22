@@ -1,5 +1,6 @@
 #include "heapi.hpp"
 
+using namespace std;
 
 int HeapInt::getInt() const {
     return *(this->inteiro);

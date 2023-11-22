@@ -1,6 +1,8 @@
 #ifndef _heapi
 #define _heapi
 
+using namespace std;
+
 class HeapInt{
     private:
         int* inteiro;
