@@ -1,62 +1,64 @@
-#include "heapi.hpp"
-#include <iostream>
+#include "HeapInt.hpp"
+
 
 HeapInt::HeapInt() {
-    this->inteiro = new int(0);
+    data = new int(0);
 }
 
-HeapInt::HeapInt(int &a) {
-    this->inteiro = new int(a);
+
+HeapInt::HeapInt(int value) {
+    data = new int(value);
 }
 
-HeapInt::HeapInt(const HeapInt &a) {
-    this->inteiro = new int(a.getInt());
+
+HeapInt::HeapInt(const HeapInt &other) {
+    data = new int(*other.data);
 }
+
 
 HeapInt::~HeapInt() {
-    delete this->inteiro;
+    delete data;
 }
 
-int HeapInt::getInt() const {
-    return *(this->inteiro);
-}
 
-void HeapInt::setInt(int a) {
-    *(this->inteiro) = a;
-}
-
-HeapInt& HeapInt::operator=(const HeapInt &a) {
-    this->setInt(a.getInt());
+HeapInt& HeapInt::operator=(int value) {
+    *data = value;
     return *this;
 }
 
-HeapInt& HeapInt::operator=(const int &a) {
-    this->setInt(a);
+
+HeapInt& HeapInt::operator=(const HeapInt &other) {
+    if (this != &other) {
+        *data = *other.data;
+    }
     return *this;
 }
 
-HeapInt& HeapInt::operator+(const HeapInt &a) {
-    this->setInt(this->getInt() + a.getInt());
-    return *this;
+
+HeapInt HeapInt::operator+(const HeapInt &other) const {
+    return HeapInt(*data + *other.data);
 }
 
-HeapInt& HeapInt::operator-(const HeapInt &a) {
-    this->setInt(this->getInt() - a.getInt());
-    return *this;
+
+HeapInt HeapInt::operator-(const HeapInt &other) const {
+    return HeapInt(*data - *other.data);
 }
 
-bool HeapInt::operator==(const HeapInt &a) {
-    return this->getInt() == a.getInt();
+
+bool HeapInt::operator==(const HeapInt &other) const {
+    return *data == *other.data;
 }
 
-std::istream& operator>>(std::istream &is, HeapInt &a) {
+
+std::ostream& operator<<(std::ostream &out, const HeapInt &heapInt) {
+    out << *heapInt.data;
+    return out;
+}
+
+
+std::istream& operator>>(std::istream &in, HeapInt &heapInt) {
     int value;
-    is >> value;
-    a.setInt(value);
-    return is;
-}
-
-std::ostream& operator<<(std::ostream &os, const HeapInt &a) {
-    os << a.getInt();
-    return os;
+    in >> value;
+    *heapInt.data = value;
+    return in;
 }
