@@ -1,3 +1,10 @@
+#ifndef _VET 
+#define _VET
+
+#include <iostream>
+
+using namespace std;
+
 template <typename T>
 class Vetor{
     private:
@@ -33,8 +40,26 @@ class Vetor{
         }
 
         void AdicionaElemento(T elemento){
+            int size = sizeof(v.Vet) / sizeof(v.Vet[0]);
+            for(int i = 0; i < size ; i++){
+                if(Vet[i] == nullptr){
+                    Vet[i] = elemento;
+                    break;
+                }
+
+            }
             
+        }
+
+        void Imprime(){
+            int size = sizeof(v.Vet) / sizeof(v.Vet[0]);
+            for(int i = 0; i < size ; i++){
+                cout << Vet[i] << " ";
+
+            }
 
         }
 
 };
+
+#endif
