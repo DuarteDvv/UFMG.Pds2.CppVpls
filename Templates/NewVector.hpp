@@ -8,7 +8,7 @@ using namespace std;
 template <typename T>
 class Vetor{
     private:
-        T* Vet;
+        T* Vet = nullptr;
 
     public:
 
