@@ -11,12 +11,10 @@ private:
     int elementos;
 
 public:
-    // Construtor que recebe um inteiro n como parâmetro
     Vetor(int n) : tamanho(n), elementos(0) {
         vetor = new T[tamanho];
     }
 
-    // Construtor de cópia
     Vetor(const Vetor& v) : tamanho(v.tamanho), elementos(v.elementos) {
         vetor = new T[tamanho];
         for (int i = 0; i < elementos; ++i) {
@@ -24,12 +22,10 @@ public:
         }
     }
 
-    // Destrutor
     ~Vetor() {
         delete[] vetor;
     }
 
-    // Método SetElemento
     void SetElemento(int i, T x) {
         if (i >= 0 && i < tamanho) {
             vetor[i] = x;
@@ -37,15 +33,14 @@ public:
         }
     }
 
-    // Método GetElemento
     T GetElemento(int i) const {
         if (i >= 0 && i < elementos) {
             return vetor[i];
         }
-        return T();  // Retorna valor padrão para tipos primitivos
+        return T(); 
     }
 
-    // Método AdicionaElemento
+    
     void AdicionaElemento(T x) {
         if (elementos < tamanho) {
             vetor[elementos] = x;
@@ -53,7 +48,6 @@ public:
         }
     }
 
-    // Método Imprime
     void Imprime() const {
         for (int i = 0; i < elementos; ++i) {
             std::cout << vetor[i] << " ";
