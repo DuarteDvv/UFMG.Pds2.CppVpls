@@ -8,17 +8,17 @@ using namespace std;
 template <typename T>
 class Vetor{
     private:
-        T* Vet = nullptr;
+        T* Vet;
 
     public:
 
         Vetor(int a){
-            T* A = new T[a];
+            T* A = new T[a]{};
         }
 
         Vetor(const Vetor& v){
             int size = sizeof(v.Vet) / sizeof(v.Vet[0]);
-            Vet = new T[size];
+            Vet = new T[size]{};
 
             for (int i = 0; i < size; ++i) {
                 Vet[i] = v.Vet[i];
