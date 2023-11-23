@@ -24,7 +24,7 @@ int main() {
                     hotel.print_info();
                     break;
                 default:
-                    throw 
+                    
             }
         }
     } catch (const std::exception &ex) {
