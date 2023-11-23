@@ -24,4 +24,17 @@ class Vetor{
 
         }
 
+
+        void SetElemento(int n, T dado){
+            Vetor[n+1] = dado;
+        }
+        T GetElemento(int n){
+            return Vetor[n+1];
+        }
+
+        void AdicionaElemento(T elemento){
+            
+
+        }
+
 };
