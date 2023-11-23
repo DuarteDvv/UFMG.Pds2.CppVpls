@@ -1,65 +1,65 @@
-#ifndef _VET 
+#ifndef _VET
 #define _VET
 
 #include <iostream>
 
-using namespace std;
-
 template <typename T>
-class Vetor{
-    private:
-        T* Vet;
+class Vetor {
+private:
+    T* vetor;
+    int tamanho;
+    int elementos;
 
-    public:
+public:
+    // Construtor que recebe um inteiro n como parâmetro
+    Vetor(int n) : tamanho(n), elementos(0) {
+        vetor = new T[tamanho];
+    }
 
-        Vetor(int a){
-            T* A = new T[a]{};
+    // Construtor de cópia
+    Vetor(const Vetor& v) : tamanho(v.tamanho), elementos(v.elementos) {
+        vetor = new T[tamanho];
+        for (int i = 0; i < elementos; ++i) {
+            vetor[i] = v.vetor[i];
         }
+    }
 
-        Vetor(const Vetor& v){
-            int size = sizeof(v.Vet) / sizeof(v.Vet[0]);
-            Vet = new T[size]{};
+    // Destrutor
+    ~Vetor() {
+        delete[] vetor;
+    }
 
-            for (int i = 0; i < size; ++i) {
-                Vet[i] = v.Vet[i];
-            }
-            
+    // Método SetElemento
+    void SetElemento(int i, T x) {
+        if (i >= 0 && i < tamanho) {
+            vetor[i] = x;
+            elementos = std::max(elementos, i + 1);
         }
+    }
 
-        ~Vetor(){
-            delete [] Vet;
-
+    // Método GetElemento
+    T GetElemento(int i) const {
+        if (i >= 0 && i < elementos) {
+            return vetor[i];
         }
+        return T();  // Retorna valor padrão para tipos primitivos
+    }
 
-
-        void SetElemento(int n, T dado){
-            Vetor[n+1] = dado;
+    // Método AdicionaElemento
+    void AdicionaElemento(T x) {
+        if (elementos < tamanho) {
+            vetor[elementos] = x;
+            ++elementos;
         }
-        T GetElemento(int n){
-            return Vetor[n+1];
+    }
+
+    // Método Imprime
+    void Imprime() const {
+        for (int i = 0; i < elementos; ++i) {
+            std::cout << vetor[i] << " ";
         }
-
-        void AdicionaElemento(T elemento){
-            int size = sizeof(v.Vet) / sizeof(v.Vet[0]);
-            for(int i = 0; i < size ; i++){
-                if(Vet[i] == nullptr){
-                    Vet[i] = elemento;
-                    break;
-                }
-
-            }
-            
-        }
-
-        void Imprime(){
-            int size = sizeof(v.Vet) / sizeof(v.Vet[0]);
-            for(int i = 0; i < size ; i++){
-                cout << Vet[i] << " ";
-
-            }
-
-        }
-
+        std::cout << std::endl;
+    }
 };
 
-#endif
+#endif 
