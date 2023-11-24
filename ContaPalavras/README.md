@@ -1,1 +1,1 @@
-C
+Usando a STL, implemente um programa que leia um texto a partir da linha de comando e imprima, para cada palavra, quantas vezes ela aparece no texto. Todas as palavras devem ser convertidas para letras minúsculas e você deve considerar que qualquer caractere que não seja alfanumérico é um separador de palavras (note que números podem fazer parte de palavras). A sua saída deverá ser uma lista com as palavras, em ordem alfabética, seguidas do número de vezes que elas aparecem.
