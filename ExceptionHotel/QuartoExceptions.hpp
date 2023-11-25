@@ -1,4 +1,9 @@
+#ifndef _QE
+#define _QE
+
 #include "Quarto.hpp"
+#include <stdexcept>
+#include <ctime>
 
 namespace quarto_excp{
     class reserva_nao_encontrada : std::exception{
@@ -48,3 +53,4 @@ namespace quarto_excp{
 
 
 }
+#endif

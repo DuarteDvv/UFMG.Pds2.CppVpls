@@ -47,4 +47,5 @@ int Reserva::comparar(Reserva& other){
 }
 void Reserva::print_info(){
     std::cout << "\tEntrada: " << get_data_entrada() <<", Saida: " << get_data_saida() << std::endl;
+    std::cout << "------------------";
 }

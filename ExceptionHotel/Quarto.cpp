@@ -1,22 +1,27 @@
 #include "Quarto.hpp"
 
+int Quarto::get_n_quarto(){
+    return this->_n_quarto;
+}
+
 std::vector<Reserva*> * Quarto::get_reservas(){
     return &this->_reservas;
 }
 
-void Quarto::adiciona_reserva(struct std::tm data_entrada, struct std::tm data_saida){
-    Reserva* R = new Reserva(data_entrada,data_saida);
-    for(auto n : _reservas){
-        if(R->comparar(*n) == 0){
-            throw quarto_excp::reserva_indisponivel(data_entrada,data_saida);
+void Quarto::adiciona_reserva(struct std::tm data_entrada, struct std::tm data_saida) {
+    Reserva* novaReserva = new Reserva(data_entrada, data_saida);
+
+    for (auto it = _reservas.begin(); it != _reservas.end(); ++it) {
+        if ((*it)->comparar(*novaReserva) == 0) {
+            throw quarto_excp::reserva_indisponivel(data_entrada, data_saida);
+        } else if ((*it)->comparar(*novaReserva) == 1) {
+            _reservas.insert(it, novaReserva);
+            return;  // Reserva adicionada, encerra a função
         }
-
-
-        
     }
-        
 
-
+    // Se chegou aqui, significa que a nova reserva é a mais recente
+    _reservas.push_back(novaReserva);
 }
 
 void Quarto::remove_reserva(struct std::tm data_inicio){

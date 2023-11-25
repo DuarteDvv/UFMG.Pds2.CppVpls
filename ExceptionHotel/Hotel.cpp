@@ -9,7 +9,9 @@ Quarto *Hotel::get_quarto_pelo_n(int n_quarto) {
 }
 
 Hotel::Hotel(){
-    _quartos = {}; 
+    for(int i = 0; i < NUMERO_MAX_QUARTO; i++){
+        _quartos[i] = nullptr;
+    } 
 
 }
 Hotel::~Hotel(){

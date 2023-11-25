@@ -1,4 +1,8 @@
+#ifndef _HE
+#define _HE
+
 #include "Hotel.hpp"
+#include <stdexcept>
 
 namespace hotel_excp{
 
@@ -45,3 +49,4 @@ namespace hotel_excp{
 
 
 }
+#endif

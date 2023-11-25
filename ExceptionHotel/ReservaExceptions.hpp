@@ -1,4 +1,10 @@
+#ifndef _RE
+#define _RE
+
 #include "Reserva.hpp"
+#include <stdexcept>
+#include <ctime>
+
 namespace reserva_excp{
     class data_entrada_no_passado : std::exception{
         private:
@@ -63,3 +69,5 @@ namespace reserva_excp{
 
 
 }
+
+#endif
