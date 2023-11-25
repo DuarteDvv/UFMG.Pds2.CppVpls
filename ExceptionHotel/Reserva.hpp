@@ -9,9 +9,10 @@
 
 #include <iostream>
 #include <iomanip>
+#include <ctime>
 
 
-class Reserva {
+class Reserva { 
 private:
     struct std::tm _data_entrada = {};
     struct std::tm _data_saida = {};
