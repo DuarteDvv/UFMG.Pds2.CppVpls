@@ -8,16 +8,25 @@ Hotel::Hotel() {
 
 Hotel::~Hotel() {
     for (auto n : _quartos) {
-        delete n;
+        if (n != nullptr) {
+            delete n;
+        }
     }
 }
 
 std::vector<Quarto *> *Hotel::get_quartos() {
-    return &this->_quartos;
+    return &_quartos;
 }
 
 Quarto *Hotel::get_quarto_pelo_n(int n_quarto) {
-    return _quartos[n_quarto];
+    for (auto i : _quartos) {
+        if(i != nullptr){
+            if (i->get_n_quarto() == n_quarto) {
+                return i;
+            }
+        }
+    }
+    return nullptr;
 }
 
 void Hotel::adiciona_reserva(int n_quarto, struct std::tm data_entrada, struct std::tm data_saida) {
@@ -26,13 +35,12 @@ void Hotel::adiciona_reserva(int n_quarto, struct std::tm data_entrada, struct s
     }
 
     Quarto* Q = get_quarto_pelo_n(n_quarto);
-    if(Q == nullptr){
+    if (Q == nullptr) {
         Q = new Quarto(n_quarto);
-        _quartos[n_quarto] = Q;
         Q->adiciona_reserva(data_entrada, data_saida);
-        throw hotel_excp::quarto_nao_criado(n_quarto);
-    }else{
-        _quartos[n_quarto] = Q;
+        _quartos.push_back(Q);
+    }
+    else{
         Q->adiciona_reserva(data_entrada, data_saida);
     }
 }
@@ -42,14 +50,20 @@ void Hotel::remove_reserva(int n_quarto, struct std::tm data_entrada) {
         throw hotel_excp::quarto_nao_existe(n_quarto);
     }
 
-    get_quarto_pelo_n(n_quarto)->remove_reserva(data_entrada);
+    Quarto* Q = get_quarto_pelo_n(n_quarto);
+    if (Q == nullptr) {
+        Q = new Quarto(n_quarto);
+        _quartos.push_back(Q);
+        throw hotel_excp::quarto_nao_criado(n_quarto);
+    }
+
+    Q->remove_reserva(data_entrada);
 }
 
 void Hotel::print_info() {
     for (auto n : _quartos) {
-        if(n != nullptr){
-            (n)->print_info();
+        if (n != nullptr && !n->get_reservas()->empty()) {
+            n->print_info();
         }
     }
 }
- 

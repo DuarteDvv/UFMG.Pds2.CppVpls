@@ -1,11 +1,13 @@
 #include "Quarto.hpp"
 #include <algorithm>
 
-Quarto::Quarto(int n) : _n_quarto(n) {}
+Quarto::Quarto(int n) : _n_quarto(n) {
+    _reservas = {};
+}
 
 Quarto::~Quarto() {
     for (auto n : _reservas) {
-        delete n;
+        delete n; 
     }
 }
 
@@ -20,10 +22,10 @@ std::vector<Reserva *> *Quarto::get_reservas() {
 void Quarto::adiciona_reserva(struct std::tm data_entrada, struct std::tm data_saida) {
     Reserva *novaReserva = new Reserva(data_entrada, data_saida);
 
-    for (auto it = _reservas.begin(); it != _reservas.end(); ++it) {
+    for (auto it = _reservas.begin(); it != _reservas.end(); it++) {
         if ((*it)->comparar(*novaReserva) == 0) {
             throw quarto_excp::reserva_indisponivel(data_entrada, data_saida);
-        } else if ((*it)->comparar(*novaReserva) == 1 || (*it)->comparar(*novaReserva) == -1) {
+        } else if ((*it)->comparar(*novaReserva) == 1) {
             _reservas.insert(it, novaReserva);
             return; // Reserva adicionada, encerra a função
         }
@@ -32,6 +34,7 @@ void Quarto::adiciona_reserva(struct std::tm data_entrada, struct std::tm data_s
     // Se chegou aqui, significa que a nova reserva é a mais recente
     _reservas.push_back(novaReserva);
 }
+
 void Quarto::remove_reserva(struct std::tm data_inicio) {
     auto it = std::remove_if(_reservas.begin(), _reservas.end(),
                              [&data_inicio](Reserva *r) {
@@ -41,7 +44,6 @@ void Quarto::remove_reserva(struct std::tm data_inicio) {
                              });
 
     if (it != _reservas.end()) {
-        delete *it;
         _reservas.erase(it, _reservas.end());
     } else {
         throw quarto_excp::reserva_nao_encontrada(this->get_n_quarto(), data_inicio);
@@ -49,8 +51,8 @@ void Quarto::remove_reserva(struct std::tm data_inicio) {
 }
 
 void Quarto::print_info() {
-    std::cout << "Quarto " << _n_quarto << " ---------" << std::endl;
-    for (auto n : _reservas) {
-        n->print_info();
+    std::cout << "Quarto " << _n_quarto << " ---------" << _reservas.size() << std::endl;
+    for (auto n = _reservas.begin(); n != _reservas.end(); n++) {
+        (*n)->print_info();
     }
 }
